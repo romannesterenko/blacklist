@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Buyer extends Model
+class BlackList extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'last_name',
-        'phone',
+        'post_doc',
+        'coment',
+        'post',
     ];
 }
