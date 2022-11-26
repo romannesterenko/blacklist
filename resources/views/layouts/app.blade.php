@@ -90,7 +90,7 @@
 </svg>
 
 <main>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top  bg-dark" aria-label="Fourth navbar example">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">My Blacklist</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,52 +109,49 @@
     </nav>
     <div class="container">
         @yield('content')
+        <div class="container" id="feedback">
+            <div class="row">
+                <h2 class="text-center py-5">Formularz zwrotny</h2>
+                <p class="text-center">Czy masz jakieś sugestie lub uwagi dotyczące usługi? Wypełnij formularz zwrotny z komentarzem, zostaw swój numer telefonu, a my oddzwonimy!</p>
+                <form class="needs-validation" novalidate="">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col py-2">
+                            <label for="firstName" class="form-label">Komentarz <span class="text-danger">*</span></label>
+                            <textarea name="" class="form-control" rows="4" placeholder="Klient nie odebrał towaru. Nadawca poniósł koszty wysyłki." required></textarea>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Dodaj nieuczciwego kupca do bazy</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-        <div class="col mb-3">
-            <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-            </a>
-            <p class="text-muted">© 2022</p>
-        </div>
-
-        <div class="col mb-3">
-
-        </div>
-
-        <div class="col mb-3">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/#check_buyer" class="nav-link px-2 text-muted">Sprawdź Kupującego</a></li>
+                <li class="nav-item"><a href="/#add_to_black_list" class="nav-link px-2 text-muted">Dodać do czarnej listy</a></li>
+                <li class="nav-item"><a href="/#how_its_works" class="nav-link px-2 text-muted">Jak to działa?</a></li>
+                <li class="nav-item"><a href="/#feedback" class="nav-link px-2 text-muted">Informacja zwrotna</a></li>
             </ul>
-        </div>
-
-        <div class="col mb-3">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-            </ul>
-        </div>
-
-        <div class="col mb-3">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-            </ul>
-        </div>
-    </footer>
+            <p class="text-center text-muted">© {{ now()->year }} My BlackList</p>
+        </footer>
+    </div>
 </main>
 
 <script src="/js/jquery-3.6.1.min.js"></script>

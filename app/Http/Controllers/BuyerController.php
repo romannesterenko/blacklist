@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buyer;
+use App\Models\BlackList;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BuyerController extends Controller
@@ -12,7 +15,15 @@ class BuyerController extends Controller
         if(strlen($phone)<11){
             return response()->json(['success' => false, 'message' => 'некорректный номер']);
         }
-
-        return response()->json(['success' => true, 'phone' => $phone]);
+        $user = Buyer::where('phone', $phone)->first();
+        if(!is_null($user)&&$user->id>0)
+            return response()->json(['success' => true, 'user' => $user, 'items' => $user->listsByPhone()]);
+        return response()->json(['success' => true, 'user' => [], 'items' => []]);
+    }
+    public function checkName(Request $request){
+        $user = Buyer::where('last_name', $request->value)->first();
+        if(!is_null($user)&&$user->id>0)
+            return response()->json(['success' => true, 'user' => $user, 'items' => $user->lists()]);
+        return response()->json(['success' => true, 'user' => [], 'items' => []]);
     }
 }

@@ -19,5 +19,6 @@ Route::get('/', function () {
 Route::get('/buyer/{phone}', function (){
     return view('buyerPage');
 });
-Route::post('/buyer/find_by_phone', [App\Http\Controllers\BuyerController::class, 'checkPhone']);
-Route::post('/blacklist/', [App\Http\Controllers\BlackListController::class, 'createBlackListRow']);
+Route::post('/buyer/find_by_phone', [App\Http\Controllers\BlackListController::class, 'getByPhone']);
+Route::post('/buyer/find_by_name', [App\Http\Controllers\BlackListController::class, 'getByName']);
+Route::post('/blacklist', [App\Http\Controllers\BlackListController::class, 'createBlackListRow']);
