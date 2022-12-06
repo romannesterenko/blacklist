@@ -9,6 +9,10 @@ const alertSuccess = (block, message, type) => {
     block.append(wrapper)
 }
 $(function (){
+    $(document).on('focus', '.check', function (e) {
+        e.preventDefault();
+        $(this).parent().find('input[type="radio"]').click();
+    });
     $('.phone_number').mask("+48 99 999-99-99", {placeholder: "+48 99 999-99-99"});
     $('.check_buyer').submit(function (e){
         e.preventDefault();
@@ -77,6 +81,35 @@ $(function (){
                     alertSuccess(alert, 'Kupujący został pomyślnie umieszczony na czarnej liście', 'success')
                 }else{
                     alertSuccess(alert, 'no', 'danger')
+                }
+            }
+        });
+    });
+    $('#feedback_form').submit(function (e){
+        e.preventDefault();
+        var form = $(this)[0];
+        var formData = new FormData(document.getElementById('feedback_form'));
+        $.ajax({
+            method: 'POST',
+            url: '/feedback',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function (response){
+                if(response.success) {
+
+                    html = '<h2 class="text-center py-5">Formularz zwrotny</h2>';
+                    html += '<div class="card border-success mb-2">';
+                    html += '<div class="card-header">Wiadomość została wysłana pomyślnie!</div>';
+                    html += '<div class="card-body">';
+                    html += '<h5 class="card-title">Dziękujemy za kontakt i życzymy miłego dnia!</h5>';
+                    html += '</div>';
+                    html += '</div>';
+                    $('#feedback .row').empty().html(html)
                 }
             }
         });

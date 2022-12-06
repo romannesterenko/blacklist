@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('mainPage');
-});
-Route::get('/buyer/{phone}', function (){
-    return view('buyerPage');
-});
+Route::get('/', [App\Http\Controllers\PagesController::class, 'showMainPage']);
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapXmlController::class, 'index']);
+Route::get('/buyer/{phone}', [App\Http\Controllers\PagesController::class, 'showBuyerPage']);
 Route::post('/buyer/find_by_phone', [App\Http\Controllers\BlackListController::class, 'getByPhone']);
 Route::post('/buyer/find_by_name', [App\Http\Controllers\BlackListController::class, 'getByName']);
 Route::post('/blacklist', [App\Http\Controllers\BlackListController::class, 'createBlackListRow']);
+Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'create']);

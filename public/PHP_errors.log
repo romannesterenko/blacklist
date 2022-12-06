@@ -1,0 +1,2 @@
+[26-Nov-2022 14:35:41 Europe/Moscow] PHP Warning:  Unsupported declare 'strict_types' in /home/r/romannyv/blacklist.romannyv.beget.tech/vendor/phpunit/phpunit/src/Framework/Assert/Functions.php on line 1
+[26-Nov-2022 14:35:41 Europe/Moscow] PHP Fatal error:  Default value for parameters with a class type hint can only be NULL in /home/r/romannyv/blacklist.romannyv.beget.tech/vendor/phpunit/phpunit/src/Framework/Assert/Functions.php on line 90

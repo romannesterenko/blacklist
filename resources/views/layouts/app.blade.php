@@ -1,12 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.104.2">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="cyan" />
+    <meta name="description" content="Czarna lista kupujących, którzy nie odebrali towaru po zamówieniu usługi pocztowej (za pobraniem), podczas gdy sprzedawca poniósł straty">
+    <meta name="author" content="Roman Nesterenko">
+    <link rel='canonical' href='http://blacklist.romannyv.beget.tech/' />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link type="image/x-icon" href="/images/favicon.ico" rel="shortcut icon">
+    <meta name="yandex-verification" content="5f8e14fe77c52c77" />
+    <meta name="google-site-verification" content="BqIFIfWuSCQWW4j76rL_7SA9CzK7w0JrGKuEJpn1b1g" />
     <title>Myblacklist - Czarna lista kupujących w Polsce</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -62,6 +66,24 @@
             -webkit-overflow-scrolling: touch;
         }
     </style>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(91391239, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/91391239" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
@@ -111,32 +133,30 @@
         @yield('content')
         <div class="container" id="feedback">
             <div class="row">
-                <h2 class="text-center py-5">Formularz zwrotny</h2>
+                <h2 class="text-center py-5 my_container">Formularz zwrotny</h2>
                 <p class="text-center">Czy masz jakieś sugestie lub uwagi dotyczące usługi? Wypełnij formularz zwrotny z komentarzem, zostaw swój numer telefonu, a my oddzwonimy!</p>
-                <form class="needs-validation" novalidate="">
+                <form class="needs-validation" id="feedback_form">
                     <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
+                        <div class="col-sm-4">
+                            <label for="feedback_name" class="form-label">Twoje imię <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="name" id="feedback_name" placeholder="Twoje imię" value="" required="">
                         </div>
-                        <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
+                        <div class="col-sm-4">
+                            <label for="feedback_email" class="form-label">Twój email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="email" id="feedback_email" placeholder="Twój email" value="" required="">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="feedback_phone" class="form-label">Twój numer telefonu <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control phone_number" name="phone" id="feedback_phone" placeholder="Twój numer telefonu" value="" required="">
                         </div>
                         <div class="col py-2">
-                            <label for="firstName" class="form-label">Komentarz <span class="text-danger">*</span></label>
-                            <textarea name="" class="form-control" rows="4" placeholder="Klient nie odebrał towaru. Nadawca poniósł koszty wysyłki." required></textarea>
+                            <label for="feedback_text" class="form-label">Komentarz <span class="text-danger">*</span></label>
+                            <textarea name="text" id="feedback_text" class="form-control" rows="4" placeholder="Wskaż swoje życzenia, sugestie lub uwagi. Wysłuchaj wszystkich i odpowiedz każdemu." required></textarea>
                         </div>
                     </div>
 
                     <hr class="my-4">
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">Dodaj nieuczciwego kupca do bazy</button>
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Wyślij opinię</button>
                 </form>
             </div>
         </div>
@@ -160,6 +180,10 @@
 
 <script src="/js/custom.js"></script>
 
-
+<style>
+    .my_container{
+        margin-top: 30px;
+    }
+</style>
 </body>
 </html>

@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\BlackList;
 use App\Models\Buyer;
+use App\Models\Check;
 use Illuminate\Http\Request;
 
 class BlackListController extends Controller
 {
+    public function showBuyerPage($phone)
+    {
+        $lists =  BlackList::where('phone', $phone)->orderByDesc('id')->get();
+        $user = Buyer::where('phone', $phone)->first();
+        return view('buyerPage', compact('lists', 'user', 'phone'));
+    }
+
     public static function preparePhone($phone)
     {
         return str_replace(['+', '-', ' '], '', $phone);
@@ -35,6 +43,12 @@ class BlackListController extends Controller
     public function getByPhone(Request $request)
     {
         $phone = self::preparePhone($request->value);
+        Check::create(
+            [
+                'phone' => $phone,
+                'ip'  => $request->ip()
+            ]
+        );
         $items = [];
         $lists =  BlackList::where('phone', $phone)->orderByDesc('id')->get();
         $return_info['phone'] = $phone;
@@ -48,9 +62,16 @@ class BlackListController extends Controller
         }
         return response()->json(['success' => true, 'items' => $items]);
     }
+
     public function getByName(Request $request)
     {
         $name = $request->value;
+        Check::create(
+            [
+                'name'=>$name,
+                'ip' => $request->ip()
+            ]
+        );
         $return_items = [];
         $lists =  BlackList::where('last_name', $name)->orderByDesc('id')->get();
         $by_phone = [];
